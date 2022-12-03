@@ -1,0 +1,19 @@
+<html>
+<head>
+<div style="position: absolute;color: white;font-size: 3em;padding-left: 30px;padding-top: 30px;">Карта прикопов TheFogIOF</div>
+<img src="https://cdn.discordapp.com/attachments/1016223169801097219/1048640858225913956/stalmap.png" id="img-to-drag" class="s-img" alt="">
+</head>
+<body>
+<style>
+body {
+background-color: #000000
+}
+</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/draggabilly/3.0.0/draggabilly.pkgd.min.js" integrity="sha512-hbEWVzVt2yK7kQmJ1NZirxxO0NPtE4W09fT4f9Emem/n0rMPFHlLbuLcUcLNrtUGWGoQ8qGvKDVJnRRuCzjeZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
+		let el = document.getElementById('img-to-drag');
+		let draggie = new Draggabilly(el, {
+		});
+	</script>
+</body>
+</html>
