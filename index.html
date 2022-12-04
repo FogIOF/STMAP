@@ -29,17 +29,20 @@ img.src="https://media.discordapp.net/attachments/1016223169801097219/1048765879
     ctx.drawImage(img,pozx,pozy,iw,ih,0,0,sw,sh); // выводим на экран
   };
   // Событие на нажатие кнопки мыши
-document.getElementById('mapid').onmousedown= function(e){
+document.getElementById('mapid').onpointerdown= function(e){
     smx=e.clientX;
     smy=e.clientY;
     drp=true;
+	console.log("down");
 };    
 // Событие на опускание кнопки мыши
-document.getElementById('mapid').onmouseup= function(e){
+document.getElementById('mapid').onpointerup= function(){
     drp=false; 
+	console.log("up");
 };
 
-document.getElementById('mapid').onmousemove= function(e){
+document.getElementById('mapid').onpointermove= function(e){
+	console.log("move");
     if (drp==true){
         emx=e.clientX;
         emy=e.clientY;
@@ -54,5 +57,4 @@ document.getElementById('mapid').onmousemove= function(e){
     smy=e.clientY;    
     
 };
-
 </script>
