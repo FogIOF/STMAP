@@ -1,19 +1,58 @@
-<html>
-<head>
-<div style="position: absolute;color: white;font-size: 3em;padding-left: 30px;padding-top: 30px;">Карта прикопов TheFogIOF</div>
-<img src="https://cdn.discordapp.com/attachments/1016223169801097219/1048640858225913956/stalmap.png" id="img-to-drag" class="s-img" alt="">
-</head>
-<body>
+<canvas id="mapid" width="700" height="700" style="cursor: move; padding: 0; margin: auto; display: block; width: 800px;">У вас не поддерживается canvas. Используйте браузер Chrome,FireFox или IE10+</canvas>
 <style>
 body {
-background-color: #000000
+background-color: #2D3033
 }
 </style>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/draggabilly/3.0.0/draggabilly.pkgd.min.js" integrity="sha512-hbEWVzVt2yK7kQmJ1NZirxxO0NPtE4W09fT4f9Emem/n0rMPFHlLbuLcUcLNrtUGWGoQ8qGvKDVJnRRuCzjeZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script>
-		let el = document.getElementById('img-to-drag');
-		let draggie = new Draggabilly(el, {
-		});
-	</script>
-</body>
-</html>
+<script>
+// инициализируем карту с организацией по умолчанию
+var drp=false;          // true - если перетаскиваем
+var pozx=0; var pozy=0; // координаты начала отображения изображения
+var smx=0;   var smy=0;   // координаты мыши - нажали на кнопку
+var emx=0;   var emy=0;   // координаты мыши - опустили на кнопку
+var img = new Image();  // создаем изображение (пустое)
+var ctx = document.getElementById('mapid').getContext('2d');
+img.src="https://media.discordapp.net/attachments/1016223169801097219/1048765879564910692/stalmap.png"; // загружаем некий файл
+  img.onload = function(){ // как загрузится, определяем какую часть изображения выводим на экран
+    if (img.width<document.getElementById('mapid').width) {
+        iw=img.width;
+        ih=img.height;
+        sw=document.getElementById('mapid').width;
+        sh=document.getElementById('mapid').height;
+        
+    } else {
+        iw=document.getElementById('mapid').width;
+        ih=document.getElementById('mapid').height;
+        sw=document.getElementById('mapid').width;
+        sh=document.getElementById('mapid').height;
+    };    
+    ctx.drawImage(img,pozx,pozy,iw,ih,0,0,sw,sh); // выводим на экран
+  };
+  // Событие на нажатие кнопки мыши
+document.getElementById('mapid').onmousedown= function(e){
+    smx=e.clientX;
+    smy=e.clientY;
+    drp=true;
+};    
+// Событие на опускание кнопки мыши
+document.getElementById('mapid').onmouseup= function(e){
+    drp=false; 
+};
+
+document.getElementById('mapid').onmousemove= function(e){
+    if (drp==true){
+        emx=e.clientX;
+        emy=e.clientY;
+        pozx=pozx+(smx-emx);pozy=pozy+(smy-emy);
+// отлавливаем выход за пределы экрана
+        if (pozx<0){pozx=0;};if (pozy<0){pozy=0;};
+        if (pozx>(img.width-iw)){pozx=img.width-iw;};
+        if (pozy>(img.height-ih)){pozy=img.height-ih;};
+        ctx.drawImage(img,pozx,pozy,iw,ih,0,0,sw,sh);
+    };
+    smx=e.clientX;
+    smy=e.clientY;    
+    
+};
+
+</script>
