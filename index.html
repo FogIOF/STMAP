@@ -29,20 +29,17 @@ img.src="https://media.discordapp.net/attachments/1016223169801097219/1048765879
     ctx.drawImage(img,pozx,pozy,iw,ih,0,0,sw,sh); // выводим на экран
   };
   // Событие на нажатие кнопки мыши
-document.getElementById('mapid').onpointerdown= function(e){
+document.getElementById('mapid').onmousedown= function(e){
     smx=e.clientX;
     smy=e.clientY;
     drp=true;
-	console.log("down");
 };    
 // Событие на опускание кнопки мыши
-document.getElementById('mapid').onpointerup= function(){
+document.getElementById('mapid').onmouseup= function(){
     drp=false; 
-	console.log("up");
 };
-
-document.getElementById('mapid').onpointermove= function(e){
-	console.log("move");
+document.getElementById('mapid').onmousemove= function(e){
+	console.log(emx);
     if (drp==true){
         emx=e.clientX;
         emy=e.clientY;
@@ -55,6 +52,33 @@ document.getElementById('mapid').onpointermove= function(e){
     };
     smx=e.clientX;
     smy=e.clientY;    
+    
+};
+
+document.getElementById('mapid').ontouchstart= function(e){
+	console.log("s2");
+    smx=e.touches[0].clientX;
+    smy=e.touches[0].clientY;
+    drp=true;
+};  
+document.getElementById('mapid').ontouchend= function(){
+	console.log("s3");
+    drp=false; 
+};
+document.getElementById('mapid').ontouchmove= function(e){
+	console.log(emx);
+	if (drp==true){
+        emx=e.touches[0].clientX;
+        emy=e.touches[0].clientY;
+        pozx=pozx+(smx-emx);pozy=pozy+(smy-emy);
+// отлавливаем выход за пределы экрана
+        if (pozx<0){pozx=0;};if (pozy<0){pozy=0;};
+        if (pozx>(img.width-iw)){pozx=img.width-iw;};
+        if (pozy>(img.height-ih)){pozy=img.height-ih;};
+        ctx.drawImage(img,pozx,pozy,iw,ih,0,0,sw,sh);
+    };
+    smx=e.touches[0].clientX;
+    smy=e.touches[0].clientY;
     
 };
 </script>
