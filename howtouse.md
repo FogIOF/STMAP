@@ -1,0 +1,1 @@
+curl -sSL https://raw.githubusercontent.com/FogIOF/STMAP/main/gen.sh | bash
