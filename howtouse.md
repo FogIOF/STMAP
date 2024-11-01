@@ -1,1 +1,1 @@
-curl -sSL https://raw.githubusercontent.com/FogIOF/STMAP/main/gen.sh | bash
+bash <(wget -qO- https://raw.githubusercontent.com/ImMALWARE/bash-warp-generator/main/warp_generator.sh)
