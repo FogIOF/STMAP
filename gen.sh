@@ -37,3 +37,4 @@ EOM
 
 conf_base64=$(echo -n "${conf}" | base64 -w 0)
 echo "Скачать конфиг: https://fogiof.github.io/STMAP/?filename=WG.conf&content=${conf_base64}"
+echo -e "\n"
